@@ -5,7 +5,7 @@ import BackgroundImage from '../components/BackgroundImage';
 import Header from '../components/Header';
 import {firebaseAuth} from '../utils/firebase-config';
 import { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 export default function SignUp() {
     const [showPassword, setShowPassword ] = useState(false);
     const Navigate = useNavigate();
@@ -41,7 +41,7 @@ export default function SignUp() {
           <div className="form">
             <input type="email" placeholder='Email Address' name='email' value={formValues.email} onChange={(e) => setFormValues({...formValues,[e.target.name]:e.target.value})}/>
             { showPassword && (<input type="password" placeholder='Password' name='password' value={formValues.password} onChange={(e) => setFormValues({...formValues,[e.target.name]:e.target.value})} />)}
-            {!showPassword && <button onClick={ () => setShowPassword(true)}>Get Started</button>}
+            {!showPassword && ( <button onClick={ () => setShowPassword(true)}>Get Started</button>)}
           </div>
           <button onClick={handleSignIn}>Sign Up</button>
       </div>

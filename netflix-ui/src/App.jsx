@@ -8,9 +8,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route exact path="/Login" element={<Login />} />
-        <Route exact path="/SignUp" element={<SignUp />} />
-        <Route exact path="/Netflix" element={<Netflix />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/signup" element={<SignUp />} />
+        <Route exact path="/" element={<Netflix />} />
       </Routes>
     </BrowserRouter>
   );
