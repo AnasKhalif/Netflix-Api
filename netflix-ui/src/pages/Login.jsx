@@ -25,7 +25,7 @@ export default function Login() {
 
     onAuthStateChanged(firebaseAuth,(currentUser)=> {
       if(currentUser) Navigate("/"); 
-    })
+    });
 
   return (
     <Container>
