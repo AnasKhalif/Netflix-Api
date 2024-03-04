@@ -56,7 +56,6 @@ export const fetchMovies = createAsyncThunk("netflix/trending", async({type},thu
         genres,
         true
         );
-    // return getRawData(`${TMBD_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genre}`);
     }
 );
  
