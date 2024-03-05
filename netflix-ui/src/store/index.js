@@ -1,6 +1,5 @@
 import { configureStore, createAsyncThunk, createSlice} from '@reduxjs/toolkit'; 
 import { API_KEY, TMBD_BASE_URL } from '../utils/constant';
-import { action } from '@remix-run/router';
 import axios from 'axios';
 
 
@@ -58,11 +57,22 @@ export const fetchMovies = createAsyncThunk("netflix/trending", async({type},thu
         );
     }
 );
+
+export const fetchDataByGenre = createAsyncThunk("netflix/movieByGenre", async({genre, type},thunkApi) => {
+    const {
+        netflix : {genres},
+    } = thunkApi.getState();
+    return getRawData(
+        `${TMBD_BASE_URL}/discover/${type}?api_key=${API_KEY}&with_genres=${genre}`,
+        genres
+        );
+    }
+);
  
 const NetflixSlice  = createSlice({
     name : "Netflix",
     initialState,
-    extraReducers:(builder) => {
+    extraReducers:(builder) => { 
         builder.addCase(getGenres.fulfilled,(state, action) => {
             state.genres = action.payload;
             state.genresLoaded = true;
@@ -70,6 +80,9 @@ const NetflixSlice  = createSlice({
         builder.addCase(fetchMovies.fulfilled,(state, action) => {
             state.movies = action.payload; 
         });
+        builder.addCase(fetchDataByGenre.fulfilled,(state, action) => {
+            state.movies = action.payload; 
+        }); 
     },
 });
 
