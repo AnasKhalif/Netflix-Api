@@ -25,7 +25,7 @@ module.exports.addToLikedMovies = async(req, res) => {
 
  module.exports.getLikedMovies = async(req,res) => {
     try {
-        const {email} = req.body;
+        const {email} = req.params;
         const user = await User.findOne({email});
     if(user){
         res.json({msg:"sucess", movies:user.likedMovies});
