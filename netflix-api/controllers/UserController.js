@@ -33,4 +33,26 @@ module.exports.addToLikedMovies = async(req, res) => {
     }catch(err){
         return res.json({msg:"Error fetching movie"});
     }
+ };
+
+ module.exports.removeFromLikedMovies = async(req,req) => {
+    try{
+        const {email, movieId} = req.body;
+         const user = await User.findOne({email});
+         if(user) {
+            const {likedMovies:movies} = user;
+            const movieIndex = likedMovies.findIndex(({ id }) => id === movieId);
+            if(!movieIndex) res.status(400).send({msg:"movie not found"})
+            likedMovies.splice(movieIndex,1);
+                await User.findByIdAndUpdate(
+                    user._id, 
+                    {
+                        likedMovies:[...user.likedMovies, data], 
+                    },
+                    {new : true}
+                );
+         }
+    }catch(err){
+        return res.json({msg: "Error deleting movie"});
+    }
  }
