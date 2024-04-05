@@ -10,6 +10,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BiChevronDown } from "react-icons/bi";
 import { firebaseAuth } from "../utils/firebase-config";
 import axios from "axios";
+import { removeFromLikedMovies } from "../store";
 
 export default React.memo(function Card({ movieData, isliked = false }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -70,7 +71,14 @@ export default React.memo(function Card({ movieData, isliked = false }) {
                 <RiThumbUpFill title="like" />
                 <RiThumbDownFill title="Dislike" />
                 {isliked ? (
-                  <BsCheck title="Remove From List" />
+                  <BsCheck
+                    title="Remove From List"
+                    onClick={() =>
+                      dispatch(
+                        removeFromLikedMovies({ movieId: movieData.id, email })
+                      )
+                    }
+                  />
                 ) : (
                   <AiOutlinePlus title="Add to my list" onClick={addToList} />
                 )}
